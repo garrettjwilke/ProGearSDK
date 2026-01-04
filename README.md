@@ -2,6 +2,12 @@
 
 A modern game engine SDK for the NeoGeo AES/MVS.
 
+> **Warning: Alpha Software**
+>
+> This project is incomplete and under active development. Expect bugs, missing features, and breaking changes without notice. Suitable only for hobbyist experimentation and tinkering.
+>
+> **No support is provided.** Issues and questions will not be answered. Use at your own risk.
+
 ## Core Concepts
 
 ProGearSDK organizes your game around three core abstractions: **Scenes**, **Actors**, and **Cameras**. Understanding these concepts is key to building games with this engine.
