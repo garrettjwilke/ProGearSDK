@@ -532,6 +532,9 @@ def index_frame_with_palette(frame, palette):
     pixels = list(frame.getdata())
     indexed = []
 
+    # Build a lookup dict for O(1) palette matching instead of O(n) list search
+    palette_lookup = {color: idx for idx, color in enumerate(palette)}
+
     for r, g, b, a in pixels:
         if a < 128:
             indexed.append(0)  # Transparent
@@ -541,10 +544,9 @@ def index_frame_with_palette(frame, palette):
             b5 = b >> 3
             key = (r5, g5, b5)
 
-            if key in palette:
-                idx = palette.index(key)
-            else:
-                # Find closest color
+            idx = palette_lookup.get(key)
+            if idx is None:
+                # Find closest color (fallback for colors not in palette)
                 idx = 1
                 min_dist = float('inf')
                 for i, (pr, pg, pb) in enumerate(palette[1:], 1):
