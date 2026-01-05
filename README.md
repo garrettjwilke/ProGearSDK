@@ -96,10 +96,10 @@ int main(void) {
         NGEngineFrameStart();
 
         // Move with joystick
-        if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_LEFT))  NGActorMove(player, FIX(-2), 0);
-        if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_RIGHT)) NGActorMove(player, FIX(2), 0);
-        if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_UP))    NGActorMove(player, 0, FIX(-2));
-        if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_DOWN))  NGActorMove(player, 0, FIX(2));
+        if (NGInputHeld(NG_PLAYER_1, NG_BTN_LEFT))  NGActorMove(player, FIX(-2), 0);
+        if (NGInputHeld(NG_PLAYER_1, NG_BTN_RIGHT)) NGActorMove(player, FIX(2), 0);
+        if (NGInputHeld(NG_PLAYER_1, NG_BTN_UP))    NGActorMove(player, 0, FIX(-2));
+        if (NGInputHeld(NG_PLAYER_1, NG_BTN_DOWN))  NGActorMove(player, 0, FIX(2));
 
         NGEngineFrameEnd();
     }
@@ -124,10 +124,10 @@ for (;;) {
     NGEngineFrameStart();
 
     // Move player
-    if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_LEFT))  NGActorMove(player, FIX(-2), 0);
-    if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_RIGHT)) NGActorMove(player, FIX(2), 0);
-    if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_UP))    NGActorMove(player, 0, FIX(-2));
-    if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_DOWN))  NGActorMove(player, 0, FIX(2));
+    if (NGInputHeld(NG_PLAYER_1, NG_BTN_LEFT))  NGActorMove(player, FIX(-2), 0);
+    if (NGInputHeld(NG_PLAYER_1, NG_BTN_RIGHT)) NGActorMove(player, FIX(2), 0);
+    if (NGInputHeld(NG_PLAYER_1, NG_BTN_UP))    NGActorMove(player, 0, FIX(-2));
+    if (NGInputHeld(NG_PLAYER_1, NG_BTN_DOWN))  NGActorMove(player, 0, FIX(2));
 
     // Center camera on player
     NGCameraSetPos(
@@ -162,10 +162,10 @@ for (;;) {
     NGEngineFrameStart();
 
     u8 moving = 0;
-    if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_LEFT))  { NGActorMove(player, FIX(-2), 0); moving = 1; }
-    if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_RIGHT)) { NGActorMove(player, FIX(2), 0); moving = 1; }
-    if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_UP))    { NGActorMove(player, 0, FIX(-2)); moving = 1; }
-    if (NGInputHeld(NG_PLAYER_1, NG_BUTTON_DOWN))  { NGActorMove(player, 0, FIX(2)); moving = 1; }
+    if (NGInputHeld(NG_PLAYER_1, NG_BTN_LEFT))  { NGActorMove(player, FIX(-2), 0); moving = 1; }
+    if (NGInputHeld(NG_PLAYER_1, NG_BTN_RIGHT)) { NGActorMove(player, FIX(2), 0); moving = 1; }
+    if (NGInputHeld(NG_PLAYER_1, NG_BTN_UP))    { NGActorMove(player, 0, FIX(-2)); moving = 1; }
+    if (NGInputHeld(NG_PLAYER_1, NG_BTN_DOWN))  { NGActorMove(player, 0, FIX(2)); moving = 1; }
 
     // Change animation when movement state changes
     if (moving != is_moving) {
