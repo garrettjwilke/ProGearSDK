@@ -259,6 +259,9 @@ def load_wav_file(source_path, yaml_dir, target_rate=None):
         samples = list(samples)
     elif sample_width == 3:
         # 24-bit signed - extract high 16 bits
+        if len(raw_data) % 3 != 0:
+            raise NGResError(f"Invalid 24-bit WAV: data length {len(raw_data)} "
+                           f"is not divisible by 3")
         n_samples = len(raw_data) // 3
         samples = []
         for i in range(n_samples):
@@ -358,6 +361,9 @@ def parse_frame_spec(spec):
                 match = re.match(r'^(\d+)-(\d+)$', item.strip())
                 if match:
                     start, end = int(match.group(1)), int(match.group(2))
+                    if start > end:
+                        raise NGResError(f"Invalid frame range '{item}': "
+                                       f"start ({start}) > end ({end})")
                     result.extend(range(start, end + 1))
                 else:
                     result.append(int(item))
@@ -368,6 +374,9 @@ def parse_frame_spec(spec):
         match = re.match(r'^(\d+)-(\d+)$', spec.strip())
         if match:
             start, end = int(match.group(1)), int(match.group(2))
+            if start > end:
+                raise NGResError(f"Invalid frame range '{spec}': "
+                               f"start ({start}) > end ({end})")
             return list(range(start, end + 1))
         return [int(spec)]
 
@@ -903,9 +912,13 @@ def process_sound_effect(sfx_def, yaml_dir, index, current_offset):
     adpcm_nibbles = encoder.encode_s16(samples)
     adpcm_data = pack_adpcm(adpcm_nibbles)
 
-    # Addresses are in 256-byte units
+    # Addresses are in 256-byte units (16-bit max = 16MB)
     start_addr = current_offset // 256
     stop_addr = (current_offset + len(adpcm_data) - 1) // 256
+
+    if stop_addr > 0xFFFF:
+        raise NGResError(f"Sound effect '{name}' exceeds V-ROM address limit. "
+                        f"Total audio data ({stop_addr * 256} bytes) exceeds 16MB.")
 
     sfx_info = {
         'name': name,
@@ -947,9 +960,13 @@ def process_music(music_def, yaml_dir, index, current_offset):
     # Calculate Delta-N for playback rate
     delta_n = calculate_delta_n(target_rate)
 
-    # Addresses are in 256-byte units
+    # Addresses are in 256-byte units (16-bit max = 16MB)
     start_addr = current_offset // 256
     stop_addr = (current_offset + len(adpcm_data) - 1) // 256
+
+    if stop_addr > 0xFFFF:
+        raise NGResError(f"Music '{name}' exceeds V-ROM address limit. "
+                        f"Total audio data ({stop_addr * 256} bytes) exceeds 16MB.")
 
     music_info = {
         'name': name,
