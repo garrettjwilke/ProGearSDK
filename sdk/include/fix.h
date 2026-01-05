@@ -30,15 +30,15 @@
 #define NG_FIX_HEIGHT   32      /**< Fix layer height in tiles */
 #define NG_FIX_VRAM     0x7000  /**< Fix layer VRAM address */
 
-#define NG_FIX_VISIBLE_TOP     2   /**< First visible row */
-#define NG_FIX_VISIBLE_BOTTOM  29  /**< Last visible row */
-#define NG_FIX_VISIBLE_LEFT    0   /**< First visible column */
-#define NG_FIX_VISIBLE_RIGHT   39  /**< Last visible column */
+#define NG_FIX_VISIBLE_TOP     2   /**< First visible row (inclusive) */
+#define NG_FIX_VISIBLE_BOTTOM  29  /**< Last visible row (inclusive) */
+#define NG_FIX_VISIBLE_LEFT    0   /**< First visible column (inclusive) */
+#define NG_FIX_VISIBLE_RIGHT   39  /**< Last visible column (inclusive) */
 
-#define NG_FIX_SAFE_TOP        3   /**< Safe area top row */
-#define NG_FIX_SAFE_BOTTOM     28  /**< Safe area bottom row */
-#define NG_FIX_SAFE_LEFT       1   /**< Safe area left column */
-#define NG_FIX_SAFE_RIGHT      38  /**< Safe area right column */
+#define NG_FIX_SAFE_TOP        3   /**< Safe area top row (inclusive) */
+#define NG_FIX_SAFE_BOTTOM     28  /**< Safe area bottom row (inclusive) */
+#define NG_FIX_SAFE_LEFT       1   /**< Safe area left column (inclusive) */
+#define NG_FIX_SAFE_RIGHT      38  /**< Safe area right column (inclusive) */
 
 #define NG_FIX_COLOR_TEXT    1     /**< Main text color index */
 #define NG_FIX_COLOR_SHADOW  2     /**< Shadow/outline color index */
